@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"time"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +15,7 @@ func LoggerHandler() gin.HandlerFunc {
 func main() {
 	r := gin.Default()
 	r.Use(LoggerHandler())
-	//註冊一個Middleware
+	
 
 	r.GET("/", func(c *gin.Context) {
 		fmt.Println("HELLO")
