@@ -22,5 +22,5 @@ func main() {
 		fmt.Println("HELLO")
 	})
 
-	r.Run(":8000")
+	r.Run("localhost:8000")
 }
