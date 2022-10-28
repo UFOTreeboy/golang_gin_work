@@ -1,18 +1,26 @@
 package main
-import(
+
+import (
 	"fmt"
-	
+	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
-func main(){
-	var res int=0
-	var x int=1
-	for x<=100{
-		res=res+x
-		x++
+func LoggerHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		t := time.Now()
+		fmt.Printf("gogo %v \n", t)
 	}
+}
+func main() {
+	r := gin.Default()
+	r.Use(LoggerHandler())
+	//註冊一個Middleware
 
-		fmt.Println(res)
+	r.GET("/", func(c *gin.Context) {
+		fmt.Println("HELLO")
+	})
 
-
+	r.Run(":8000")
 }
