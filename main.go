@@ -1,25 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-func LoggerHandler() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		t := time.Now()
-		fmt.Printf("gogo %v \n", t)
-	}
-}
 func main() {
-	r := gin.Default()
-	r.Use(LoggerHandler())
-	
-
-	r.GET("/", func(c *gin.Context) {
-		fmt.Println("HELLO")
+	router := gin.Default()
+	router.LoadHTMLGlob("template/*")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"msg": "hello~ html",
+		})
 	})
 
-	r.Run("localhost:8000")
+	router.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index2.html", gin.H{
+			"msg": "hello~ html",
+		})
+	})
+	
+	router.Run("127.0.0.1:8080")
 }
